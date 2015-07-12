@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^$', 'app.views.publico', name='index'),
     url(r'^registro/$', 'app.views.registro', name='registro'),
     url(r'^login/$', 'app.views.login', name='login'),
+    url(r'^lista_producto/$', 'app.views.producto', name='producto'),
+    
 ]

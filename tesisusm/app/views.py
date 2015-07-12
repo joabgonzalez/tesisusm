@@ -32,3 +32,19 @@ def registro(request):
 def login(request):
     template = "login.html"
     return render_to_response(template,)
+
+def producto(request):
+    producto = Producto.objects.all()
+    if request.method == 'POST':
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/lista_producto.html")
+    else:
+        form = ProductoForm()
+
+    template = "lista_producto.html"
+    return render_to_response(template,context_instance = RequestContext(request, locals()))
+
+
+

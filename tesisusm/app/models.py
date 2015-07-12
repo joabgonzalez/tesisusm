@@ -32,3 +32,27 @@ class Usuario(models.Model):
 
     def __unicode__(self):
         return "%s %s - (%s)" % (self.nb_usuario, self.ap_usuario, self.user)
+    
+class Tipo_Producto(models.Model):
+    id_tipo_producto = models.AutoField(primary_key=True)
+    nb_tipo_producto = models.CharField(max_length=50)
+    
+    
+class Impuesto(models.Model):
+    id_impuesto = models.AutoField(primary_key=True)
+    iva = models.FloatField()
+    flete = models.FloatField() #cargo por transporte
+    
+class Producto(models.Model):
+    id_prod = models.AutoField(primary_key=True)
+    cod_prod =models.CharField(max_length=10)
+    nb_prod = models.CharField(max_length=100)
+    id_tipo_prod = models.ForeignKey(Tipo_Producto)
+    desc_prod = models.TextField()
+    precio_prod = models.FloatField()
+    status = models.BooleanField()
+    iva = models.ForeignKey(Impuesto)
+
+    
+    
+    

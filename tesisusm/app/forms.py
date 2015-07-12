@@ -7,3 +7,8 @@ class UsuarioForm(ModelForm):
 		model = Usuario
 		exclude = ("id_user", "id_rol", "fe_create", "status",)
 		widgets = {'clave': forms.PasswordInput()}
+
+class ProductoForm(ModelForm):
+	class Meta:
+		model = Producto
+		exclude = ("status",)
