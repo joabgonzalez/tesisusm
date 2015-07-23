@@ -1,0 +1,83 @@
+{% extends "plantilla.html" %}
+<!-- SE MOSTRARA FE_INGRESO y FE_EGRESO EN LA VISTA -->
+
+{% block content %}
+
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><h2> Registro de Empleado </h2></div>
+                    </div>
+                    <br></br>
+
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-6">
+
+                    <form method="POST">
+
+                        {% if form.errors %}
+
+                        <p>Ha ocurrido un error en algun lado</p>
+
+                        {% endif %}
+
+                        {% csrf_token %}
+
+
+
+
+                    <div id="" class="form-group">
+                        <label for="id_ci">Cedula:</label>
+                        <input id="id_ci" class="form-control" maxlength="50" name="ci" type="text" placeholder="Ingrese cedula"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_nb_1">Primero nombre:</label>
+                        <input id="id_nb_1" class="form-control" maxlength="50" name="nb_1" type="text" placeholder="Ingrese primer nombre"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_nb_2">Segundo nombre:</label>
+                        <input id="id_nb_2" class="form-control" maxlength="50" name="nb_2" type="text" placeholder="Ingrese segundo nombre"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_ap_1">Primer apellido:</label>
+                        <input id="id_ap_1" class="form-control" maxlength="50" name="ap_1" type="text" placeholder="Ingrese primer apellido"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_ap_2">Segundo apellido:</label>
+                        <input id="id_ap_2" class="form-control" maxlength="50" name="ap_2" type="text" placeholder="Ingrese segundo apellido"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_tlf1">Telefono:</label>
+                        <input id="id_tlf1" class="form-control" maxlength="15" name="tlf1" type="text" placeholder="Ingrese telefono"/>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label for="id_cel">Celular:</label>
+                        <input id="id_cel" class="form-control" maxlength="15" name="cel" type="text" placeholder="Ingrese celular"/>
+                    </div>
+                        
+                        
+                            <div class="col-md-1"><input type="submit" class="btn btn-success" value="submit"></div>
+                            <div class="col-md-1"><a href="/lista_producto"><button type="button" class="btn btn-danger">Cancelar</button></a></div>
+
+
+                        </div>
+
+
+
+                     </form>    
+
+                     </div>
+
+                     <div class="col-md-3"></div>       
+                   
+                        
+            </div>
+{% endblock %}  
+

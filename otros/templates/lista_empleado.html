@@ -1,0 +1,55 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-4"><h2> Listado de Empleados </h2></div>
+        </div>
+        <br></br>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <a href="/reg_empleado"><button type="button" class="btn btn-info">+</button></a>
+    </div><br>    
+    
+    <table class="table">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Primer Nombre</th>
+          <th scope="col">Segundo Nombre</th>
+          <th scope="col">Primer Apellido</th>
+          <th scope="col">Segundo Apellido</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Móvil</th>
+          <!--<th scope="col">Correo</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Sueldo</th>
+          <th scope="col">Cargo</th>-->
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+
+        {% for e in empleado %}
+        <tr>
+          <td>{{ e.id_empleado }}</td>
+          <td>{{ e.nb_1 }}</td>
+          <td>{{ e.nb_2 }}</td>
+          <td>{{ e.ap_1 }}</td>
+          <td>{{ e.ap_2 }}</td>
+          <td>{{ e.tlf1 }}</td>
+          <td>{{ e.cel }}</td>
+          <!--<td>{{ e.mail }}</td>
+          <td>{{ e.direccion }}</td>
+          <td>{{ e.sueldo }}</td>
+          <td>{{ e.id_cargo }}</td>-->
+          <td><i class="fa fa-trash"></i></td>
+          <td><i class="fa fa-pencil"></i></td> 
+        </tr> 
+        {% endfor %}  
+       
+    </table>
+</div>              
+
+
+{% endblock %} 

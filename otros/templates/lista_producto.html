@@ -1,0 +1,36 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-4"><h2> Listado de Productos </h2></div>
+        </div>
+        <br></br>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <a href="/reg_producto"><button type="button" class="btn btn-info">+</button></a>
+    </div><br>    
+    
+    <table class="table">
+        <tr>
+          <th scope="col">Nombre del Producto</th>
+          <th scope="col">Precio del Producto</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+
+         {% for p in producto %}   
+        <tr>
+          <td>{{ p.nb_prod }}</td>
+          <td>{{ p.precio_prod }}</td>
+          <td><i class="fa fa-trash"></i></td>
+          <td><i class="fa fa-pencil"></i></td>
+        </tr>
+        {% endfor %}      
+    </table>
+</div>              
+
+
+{% endblock %} 
