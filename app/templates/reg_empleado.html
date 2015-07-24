@@ -1,15 +1,14 @@
 {% extends "plantilla_privada.html" %}
-<!-- SE MOSTRARA FE_INGRESO y FE_EGRESO EN LA VISTA -->
 
 {% block title %}
 
-Registro de empleado
+Empleado
 
 {% endblock %}
 
 {% block pagetitle %}
 
-Registro de empleados
+Registro de empleado
 
 {% endblock %}
 
@@ -17,9 +16,9 @@ Registro de empleados
 
 <div class="container-fluid">
 
-	<div class="col-md-2"><!--RELLENO--></div>
+	<div class="col-md-3"><!--RELLENO--></div>
 
-	<div class="col-md-4">
+	<div class="col-md-6">
 
 		<form method="POST">
 
@@ -74,7 +73,7 @@ Registro de empleados
 			<div class="col-md-12">
 
 				<button type="submit" class="btn btn-success pull-right" style="margin: 2px"> Registrar <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
-				<a href="/empleados"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> Cancelar <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+				<a href="{% url 'lista_empleados'%}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> Cancelar <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
 
 			</div>
 

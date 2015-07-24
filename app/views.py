@@ -10,15 +10,9 @@ from forms import *
 class Index(TemplateView):
 	template_name = 'index.html'
 
-#USUARIOS
-class Usuarios(ListView):
-	template_name = 'lista_usuario.html'
-	model = Usuario
-	context_object_name = 'usuario'
-
-#REGISTRO_USUARIO
-class RegUsuarios(FormView):
-	template_name = 'reg_usuario.html'
+#REGISTRO_USUARIO_PUBLICO
+class RegUsuariosPub(FormView):
+	template_name = 'reg_usuario_pub.html'
 	form_class = UserForm
 	success_url = reverse_lazy('inicio')
 
@@ -30,13 +24,35 @@ class RegUsuarios(FormView):
 		usuario.apellido = form.cleaned_data['apellidos']
 		usuario.correo = form.cleaned_data['correo_electronico']
 		usuario.save()
-		return super(RegUsuarios, self).form_valid(form)
+		return super(RegUsuariosPub, self).form_valid(form)
 
+#LISTA_USUARIOS_EN_LA_VISTA_PRIVADA
+class Usuarios(ListView):
+	template_name = 'lista_usuario_priv.html'
+	model = Usuario
+	context_object_name = 'usuario'
+	
+#REGISTRO_USUARIO_PRIVADO
+class RegUsuariosPriv(FormView):
+	template_name = 'reg_usuario_priv.html'
+	form_class = UserForm
+	success_url = reverse_lazy('lista_usuarios_priv')
+
+	def form_valid (self, form):
+		user = form.save()
+		usuario = Usuario()
+		usuario.usuario = user
+		usuario.nombre = form.cleaned_data['nombres']
+		usuario.apellido = form.cleaned_data['apellidos']
+		usuario.correo = form.cleaned_data['correo_electronico']
+		usuario.save()
+		return super(RegUsuariosPriv, self).form_valid(form)
+	
 #INICIO_PRIVADO
 class Main(TemplateView):
 	template_name = 'main.html'
 
-#PRODUCTOS
+#LISTA_PRODUCTOS
 class Productos(ListView):
 	template_name = 'lista_producto.html'
 	model = Producto
@@ -52,18 +68,50 @@ class RegProductos(FormView):
 		producto = form.save()
 		return super(RegProductos, self).form_valid(form)
 
-#EMPLEADOS
+#LISTA_EMPLEADOS
 class Empleados(ListView):
 	template_name = 'lista_empleado.html'
 	model = Empleado
 	context_object_name = 'empleado'
 
-#LISTA_EMPLEADOS
+#REGISTRO_EMPLEADOS
 class RegEmpleados(FormView):
 	template_name = 'reg_empleado.html'
 	form_class = EmpleadoForm
 	success_url = reverse_lazy('lista_empleados')
 
 	def form_valid (self, form):
-		producto = form.save()
+		empleado = form.save()
 		return super(RegEmpleados, self).form_valid(form)
+	
+#LISTA_VENTAS	
+class Ventas(ListView):
+	template_name = 'lista_venta.html'
+	model = Venta
+	context_object_name = 'venta'	
+	
+#REGSITRO_VENTAS
+class RegVentas(FormView):
+	template_name = 'reg_venta.html'
+	form_class = VentaForm
+	success_url = reverse_lazy('ventas')
+
+	def form_valid (self, form):
+		venta = form.save()
+		return super(RegVentas, self).form_valid(form)
+	
+#LISTA_VENTAS	
+class Clientes(ListView):
+	template_name = 'lista_cliente.html'
+	model = Cliente
+	context_object_name = 'cliente'
+		
+#REGSITRO_CLIENTES	
+class RegClientes(FormView):
+	template_name = 'reg_cliente.html'
+	form_class = ClienteForm
+	success_url = reverse_lazy('lita_clientes')
+
+	def form_valid (self, form):
+		cliente = form.save()
+		return super(RegClientes, self).form_valid(form)

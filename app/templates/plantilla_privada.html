@@ -58,7 +58,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/main"><i class="fa fa-home"></i> Menu Principal</a>
+					<a class="navbar-brand">Picnikki</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -74,7 +74,7 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="/logout"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
+									<a href="{% url 'logout'%}"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
 								</li>
 							</ul>
 						</li>
@@ -89,16 +89,21 @@
 			<div class="row">
 				<div class="col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<li class=""><a href="/productos"><i class="fa fa-shopping-cart"></i> Productos </a></li>
-						<li class=""><a href="/usuarios"><i class="fa fa-users"></i> Usuarios </a></li>
+						<li class=""><a href="{% url 'main'%}"><i class="fa fa-home"></i> Inicio </a></li>
+						<li class=""><a href="{% url 'lista_productos'%}"><i class="fa fa-shopping-cart"></i> Productos </a></li>
+						<li class=""><a href="{% url 'lista_usuarios_priv'%}"><i class="fa fa-users"></i> Usuarios </a></li>
 						<li class=""><a href="#"><i class="fa fa-bar-chart"></i> Estadísticas </a></li>
-						<li class=""><a href="/empleados"><i class="fa fa-users"></i> Empleados </a></li>
-						<li class=""><a href="#"><i class="fa fa-usd"></i> Ventas </a></li>
+						<li class=""><a href="{% url 'lista_empleados'%}"><i class="fa fa-male"></i> Empleados </a></li>
+						<li class=""><a href="{% url 'lista_ventas'%}"><i class="fa fa-usd"></i> Ventas </a></li>
+						<li class=""><a href="{% url 'lista_clientes'%}"><i class="fa fa-book"></i> Clientes </a></li>
 						<li class=""><a href="#"><i class="fa fa-barcode"></i> Inventario </a></li>
 					</ul>
 				</div>
 				<div class="col-md-10 col-md-offset-2 main">
-					<h1 class="page-header">{% block pagetitle %}<!--Titulo de la pagina-->{% endblock %}</h1>
+					<h1 class="page-header">
+					<div class="col-md-1"></div>
+					{% block pagetitle %}<!--Titulo de la pagina-->{% endblock %}</h1>
+
 					{% block content %}
 
 					<!-- Contenido -->

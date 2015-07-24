@@ -25,17 +25,21 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #PUBLICO
     url(r'^$', Index.as_view(), name='inicio'),
-    url(r'^registro/$', RegUsuarios.as_view(), name='registro_usuario'),
+    url(r'^registro/$', RegUsuariosPub.as_view(), name='registro_usuario_pub'),
     #LOGIN
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
     #LOGOUT
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     #PRIVADO
     url(r'^main/$', login_required(Main.as_view()), name='main'),
-    url(r'^usuarios/$', login_required(Usuarios.as_view()), name='lista_usuarios'),
-    url(r'^usuarios/registrar$', login_required(RegUsuarios.as_view()), name='registro_usuarios_priv'),
+    url(r'^usuarios/$', login_required(Usuarios.as_view()), name='lista_usuarios_priv'),
+    url(r'^usuarios/registrar$', login_required(RegUsuariosPriv.as_view()), name='registro_usuarios_priv'),
     url(r'^productos/$', login_required(Productos.as_view()), name='lista_productos'),
     url(r'^productos/registrar$', login_required(RegProductos.as_view()), name='registro_productos'),
     url(r'^empleados$', login_required(Empleados.as_view()), name='lista_empleados'),
     url(r'^empleados/registrar$', login_required(RegEmpleados.as_view()), name='registro_empleados'),
+    url(r'^ventas$', login_required(Ventas.as_view()), name='lista_ventas'),
+    url(r'^ventas/registrar$', login_required(RegVentas.as_view()), name='registro_ventas'),
+    url(r'^clientes$', login_required(Clientes.as_view()), name='lista_clientes'),
+    url(r'^clientes/registrar$', login_required(RegClientes.as_view()), name='registro_clientes'),
 ]   

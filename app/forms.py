@@ -27,6 +27,7 @@ class ProductoForm(ModelForm):
    				'desc_prod': ("Descripción"),
    				'precio_prod': ("Precio"),
      	}
+		
 
 class EmpleadoForm(ModelForm):
 	class Meta:
@@ -45,8 +46,8 @@ class EmpleadoForm(ModelForm):
 				'direccion': forms.TextInput(attrs={'class': 'form-control'}),
 				'sueldo': forms.TextInput(attrs={'class': 'form-control'}),
 				'id_cargo': forms.Select(attrs={'class': 'form-control'}),
-				'fe_ingreso': forms.TextInput(attrs={'class': 'form-control'}),
-				'fe_egreso': forms.TextInput(attrs={'class': 'form-control'}),
+				'fe_ingreso': forms.DateInput(attrs={'class': 'form-control'}),
+				'fe_egreso': forms.DateInput(attrs={'class': 'form-control'}),
 						
   		}
 		labels = {
@@ -65,4 +66,51 @@ class EmpleadoForm(ModelForm):
 				'fe_ingreso': ("Fecha de Ingreso"),
 				'fe_egreso': ("Fecha de Egreso"),
      	}
+		
+		
+class VentaForm(ModelForm):
+	class Meta:
+		model = Venta
+		exclude = ('status',)
+		widgets = {
+				'cliente': forms.Select(attrs={'class': 'form-control'}),
+				'producto': forms.Select(attrs={'class': 'form-control'}),
+				'cantidad': forms.TextInput(attrs={'class': 'form-control'}),
+				'fe_venta': forms.DateInput(attrs={'class': 'form-control'}),
+					
+  		}
+		labels = {
+   				'cliente': ("Cliente"),
+   				'producto': ("Producto"),
+   				'cantidad': ("Cantidad"),
+   				'fe_venta': ("Fecha de Venta"),
+     	}
+		
+	
+class ClienteForm(ModelForm):
+	class Meta:
+		model = Cliente
+		exclude = ('status',)
+		widgets = {
+				'rif': forms.TextInput(attrs={'class': 'form-control'}),
+				'nb_cliente': forms.TextInput(attrs={'class': 'form-control'}),
+				'dir_cliente': forms.TextInput(attrs={'class': 'form-control'}),
+				'tlf1': forms.TextInput(attrs={'class': 'form-control'}),
+				'tlf2': forms.TextInput(attrs={'class': 'form-control'}),
+				'fax': forms.TextInput(attrs={'class': 'form-control'}),
+				'mail': forms.TextInput(attrs={'class': 'form-control'}),
+				'iva': forms.CheckboxInput(attrs={'class': 'checkbox'}),
+				
+  		}
+		labels = {
+   				'rif': ("RIF o CI"),
+   				'dir_cliente': ("Dirección"),
+   				'nb_cliente': ("Nombre o Razón Social"),
+   				'tlf1': ("Teléfono 1"),
+   				'tlf2': ("Teléfono 2"),
+   				'fax': ("Fax"),
+   				'mail': ("Correo Electrónico"),
+				'iva': ("Aplica IVA"),
+	 	}	
+
 		
