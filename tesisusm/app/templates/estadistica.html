@@ -1,0 +1,82 @@
+{% extends "plantilla_privada.html" %}
+{% load static %} 
+
+{% block title %}
+
+Estadisticas
+
+{% endblock %}
+
+{% block css %}
+
+<link href="{% static 'morris/graph.css' %}" rel="stylesheet">
+<link href="{% static 'morris/prettify.min.css' %}" rel="stylesheet">
+<link href="{% static 'morris/morris.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Estadisticas
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+	<div class="col-md-10">
+
+	<div id="graph"></div>
+
+		<div style="display: none;">
+			<pre id="code" class="prettyprint linenums">
+
+				var valores = [
+					{"etiqueta": "Enero", "utilidad": 150, "proyeccion": null},
+					{"etiqueta": "Febrero", "utilidad": 20, "proyeccion": null},
+					{"etiqueta": "Marzo", "utilidad": 300, "proyeccion": null},
+					{"etiqueta": "Abril", "utilidad": 40, "proyeccion": null},
+					{"etiqueta": "Mayo", "utilidad": 50, "proyeccion": null},
+					{"etiqueta": "Junio", "utilidad": 60, "proyeccion": null},
+					{"etiqueta": "Julio", "utilidad": 70, "proyeccion": null},
+					{"etiqueta": "Agosto", "utilidad": 80, "proyeccion": null},
+					{"etiqueta": "Septiembre", "utilidad": 90, "proyeccion": null},
+					{"etiqueta": "Octubre", "utilidad": 0, "proyeccion": null},
+					{"etiqueta": "Noviembre", "utilidad": 0, "proyeccion": null},
+					{"etiqueta": "Diciembre", "utilidad": 0, "proyeccion": null}
+				];
+				Morris.Line({
+					element: 'graph',
+					data: valores,
+					xkey: 'etiqueta',
+					ykeys: ['utilidad', 'proyeccion'],
+					labels: ['Utilidad', 'Proyección'],
+					xLabelAngle: 40,
+					grid: true,
+					parseTime: false,
+					resize: true
+				});
+
+			</pre>
+		</div>
+
+	</div>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'morris/raphael-min.js' %}"></script>
+<script src="{% static 'morris/morris.js' %}"></script>
+<script src="{% static 'morris/prettify.min.js' %}"></script>
+<script src="{% static 'morris/graph.js' %}"></script>
+
+{% endblock %}

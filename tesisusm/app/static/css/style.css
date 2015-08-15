@@ -1,0 +1,14 @@
+th, td {
+	text-align: center; 
+	vertical-align: middle;
+}
+
+.btn-circle {
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  padding: 8.5px;
+  font-size: 10pt;
+  line-height: 1.42;
+  border-radius: 19px;
+}
