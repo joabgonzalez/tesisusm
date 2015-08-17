@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+
+		<!-- META
+		================================================== -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Language" content="es">
+		<meta name="Author" content="Joab González | Leonardo Arellano">
+		<meta name="Copyright" content="© Joab González | Leonardo Arellano">
+		{% block meta %}
+
+		<!-- Etiquetas meta -->
+
+		{% endblock %}
+
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		
+		<title>Picnikki | {% block title %}<!-- Titulo -->{% endblock %}</title>
+
+		<!-- FAVICON
+		================================================== -->
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+		<!-- CSS
+		================================================== -->
+		<!-- Bootstrap Core CSS -->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<!-- Dashboard CSS -->
+		<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+		<!-- Estilos personalizados -->
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<!-- Custom Fonts -->
+		<link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+		{% block estilos %}
+
+		<!-- Estilos -->
+
+		{% endblock %}
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+
+		<!-- NAVBAR
+		================================================== -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="" href="{% url 'dashboard' %}"><img src="{% static 'img/logo_picnikki.png' %}" alt="Imagen 1" width="150px" height="50px" /></a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								{{user.username|upper}}
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#"><i class="fa fa-fw fa-user"></i>Perfíl</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="{% url 'logout'%}"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
+								</li>
+							</ul>
+						</li>
+			 		</ul>
+				</div>
+			</div>
+		</nav>
+
+		{# dashboard #}
+		{% url 'dashboard' as inicio %}
+		{# usuarios #}
+		{% url 'lista_usuarios_priv' as user_lis %}
+		{% url 'registro_usuarios_priv' as user_reg %}
+		{# estadisticas #}
+		{% url 'estadisticas' as graph %}
+		{# productos #}
+		{% url 'lista_productos' as prod_lis %}
+		{% url 'registro_productos' as prod_reg %}
+		{% url 'editar_productos' as prod_edi %}
+		{% url 'eliminar_productos' as prod_eli %}
+		{# ventas #}
+		{% url 'lista_ventas' as vent_lis %}
+		{% url 'registro_ventas' as vent_reg %}
+		{% url 'editar_ventas' as vent_edi %}
+		{% url 'eliminar_ventas' as vent_eli %}
+		{# clientes #}
+		{% url 'lista_clientes' as clie_lis %}
+		{% url 'registro_clientes' as clie_reg %}
+		{% url 'editar_clientes' as clie_edi %}
+		{% url 'eliminar_clientes' as clie_eli %}
+		{# empleados #}
+		{% url 'lista_empleados' as empl_lis %}
+		{% url 'registro_empleados' as empl_reg %}
+		{% url 'editar_empleados' as empl_edi %}
+		{% url 'eliminar_empleados' as empl_eli %}
+
+		<!-- PANEL DE NAVEGACION
+		================================================== -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						{# dashboard #}
+						<li class="{% if request.get_full_path = inicio %}active{% endif %}">
+							<a href="{% url 'dashboard'%}"><i class="fa fa-home"></i> Inicio </a>
+						</li>
+						{# usuarios #}
+						<li class="{% if request.get_full_path = user_lis or request.get_full_path = user_reg %}active{% endif %}">
+							<a href="{% url 'lista_usuarios_priv'%}"><i class="fa fa-users"></i> Usuarios </a>
+						</li>
+						{# estadistica #}
+						<li class="{% if request.get_full_path = graph %}active{% endif %}">
+							<a href="{% url 'estadisticas'%}"><i class="fa fa-bar-chart"></i> Estadísticas </a>
+						</li>
+						{# prducto #}
+						<li class="{% if request.get_full_path = prod_lis or request.get_full_path = prod_reg or request.get_full_path = prod_edi or request.get_full_path = prod_eli %}active{% endif %}">
+							<a href="{% url 'lista_productos'%}"><i class="fa fa-shopping-cart"></i> Productos </a>
+						</li>
+						{# ventas #}
+						<li class="{% if request.get_full_path = vent_lis or request.get_full_path = vent_reg or request.get_full_path = vent_edi or request.get_full_path = vent_eli %}active{% endif %}">
+							<a href="{% url 'lista_ventas'%}"><i class="fa fa-usd"></i> Ventas </a>
+						</li>
+						{# inventario #}
+						<li class="	">
+							<a href="#"><i class="fa fa-barcode"></i> Inventario </a>
+						</li>
+						{# clientes #}
+						<li class="{% if request.get_full_path = clie_lis or request.get_full_path = clie_reg or request.get_full_path = clie_edi or request.get_full_path = clie_eli %}active{% endif %}">
+							<a href="{% url 'lista_clientes'%}"><i class="fa fa-book"></i> Clientes </a>
+						</li>
+						{# empleados #}
+						<li class="{% if request.get_full_path = empl_lis or request.get_full_path = empl_reg or request.get_full_path = empl_edi or request.get_full_path = empl_eli %}active{% endif %}">
+							<a href="{% url 'lista_empleados'%}"><i class="fa fa-male"></i> Empleados </a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-10 col-md-offset-2 main">
+					<h1 class="page-header">
+					<div class="col-md-1"></div>
+					{% block pagetitle %}<!--Titulo de la pagina-->{% endblock %}</h1>
+
+					{% block content %}
+
+					<!-- Contenido -->
+
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+
+		<!-- JS
+		================================================== -->
+		<script src="{% static 'js/jquery-2.1.4.js' %}"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		{% block js %}
+
+		<!-- Javascript -->
+
+		{% endblock %}
+
+	</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Productos
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Listado de Productos
+
+<a href="{% url 'registro_productos'%}"><button type="button" class="btn btn-primary pull-right">Nuevo Producto <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+	<div class="col-md-10">
+
+	{% if producto %}
+
+		<table class="table">
+
+			<tr class="info">
+				<th scope="col">Nombre del Producto</th>
+				<th scope="col">Precio del Producto</th>
+				<th></th>
+			</tr>
+
+			{% for p in producto %}
+
+			<tr>
+				<td>{{ p.nb_prod|capfirst }}</td>
+				<td>{{ p.precio_prod }}</td>
+				<td>
+					<a href="{% url 'editar_productos' p.id_prod %}"><button type="button" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>&nbsp;
+					<a href="{% url 'eliminar_productos' p.id_prod %}"><button type="button" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+				</td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+
+	{% else %}
+
+		<p>No se ha registrado ningún producto.</p>
+
+	{% endif %}
+
+	</div>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+</div>
+
+
+{% endblock %} 
