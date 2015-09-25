@@ -1,0 +1,44 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Clientes
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Eliminar Cliente
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+	<div class="col-md-8">
+
+		<form action="" method="post">
+
+			{% csrf_token %}
+
+
+				<div class="alert alert-warning" role="alert">
+					<h4>¿Está seguro que desea eliminar el cliente <strong>"{{ cliente.cliente }}"</strong>?</h4>
+				</div>
+
+				<button type="submit" class="btn btn-success pull-right" style="margin: 2px"> Si <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+				<a href="{% url 'lista_clientes' %}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+
+{% endblock %} 
