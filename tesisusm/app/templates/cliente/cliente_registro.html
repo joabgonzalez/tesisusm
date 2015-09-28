@@ -1,0 +1,41 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Clientes
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Registrar cliente
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+	<div class="col-md-3"><!--RELLENO--></div>
+
+	<div class="col-md-6">
+
+		<form method="POST">
+
+			{% csrf_token %}
+
+			{{form.as_p}}
+			
+			<br>
+			<button type="submit" class="btn btn-success pull-right" style="margin: 2px"> Registrar <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+			<a href="/productos"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> Cancelar <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+{% endblock %}

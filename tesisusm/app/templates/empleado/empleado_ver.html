@@ -1,0 +1,61 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Empleados
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Detalle de empleado
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+	<div class="col-md-8">
+
+	<ul class="list-group">
+		<li class="list-group-item"><strong>Cédula de identidad:</strong> {{empleado.cedula}} </li>
+		<li class="list-group-item"><strong>Primer nombre:</strong> {{empleado.primer_nombre}} </li>
+		{% if segundo_nombre %}
+			<li class="list-group-item"><strong>Segundo nombre:</strong> {{empleado.segundo_nombre}} </li>
+		{% endif %}
+		<li class="list-group-item"><strong>Primer apellido:</strong> {{empleado.primer_apellido}} </li>
+		{% if segundo_apellido %}
+			<li class="list-group-item"><strong>Segundo apellido:</strong> {{empleado.segundo_apellido}} </li>
+		{% endif %}
+		{% if telefono_local %}
+			<li class="list-group-item"><strong>Teléfono local:</strong> {{empleado.telefono_local}} </li>
+		{% endif %}
+		<li class="list-group-item"><strong>Teléfono móvil:</strong> {{empleado.telefono_celular}} </li>
+		<li class="list-group-item"><strong>Fecha de nacimiento: </strong> {{empleado.fecha_nacimiento}} </li>
+		<li class="list-group-item"><strong>Dirección:</strong> {{empleado.direccion}} </li>
+		<li class="list-group-item"><strong>Correo personal:</strong> {{empleado.correo_personal}} </li>
+		{% if correo_corporativo %}
+			<li class="list-group-item"><strong>Correo corporativo:</strong> {{empleado.correo_corporativo}} </li>
+		{% endif %}
+		<li class="list-group-item"><strong>Sueldo:</strong> {{empleado.sueldo}} </li>
+		<li class="list-group-item"><strong>Cargo:</strong> {{empleado.cargo}} </li>
+		<li class="list-group-item"><strong>Tipo de empleado:</strong> {{empleado.tipo_empleado}} </li>
+		<li class="list-group-item"><strong>Fecha de ingreso:</strong> {{empleado.fecha_ingreso}} </li>
+		{% if fecha_egreso %}
+			<li class="list-group-item"><strong>Fecha de egreso:</strong> {{empleado.fecha_egreso}} </li>
+		{% endif %}
+	</ul>
+
+	<a href="{% url 'editar_empleados' empleado.id_empleado %}"><button type="button" class="btn btn-info pull-right" style="margin: 2px">Editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+	<a href="{% url 'lista_empleados' %}"><button type="button" class="btn btn-primary pull-right" style="margin: 2px">Volver <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button></a>
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+{% endblock %}
