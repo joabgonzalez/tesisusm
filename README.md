@@ -1,1 +1,2 @@
-# Actualizado 06-10
+# Actualizado 07-10
+Se acerca la version final.
