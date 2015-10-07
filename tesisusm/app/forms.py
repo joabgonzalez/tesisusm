@@ -41,7 +41,7 @@ class UserForm(UserCreationForm):
 			'data-toggle': 'tooltip', 
 			'data-placement': 'top', 
 			'title': 'Solo permite caracteres alfabéticos',
-			}),
+			}),Debe ser una dirección de correo electrónico válida
 	)
 	segundo_apellido = forms.CharField(
 		max_length=50,
@@ -65,7 +65,7 @@ class UserForm(UserCreationForm):
 			'autocomplete': 'off',
 			'data-toggle': 'tooltip', 
 			'data-placement': 'top', 
-			'title': 'Debe ser un correo válido',
+			'title': 'Debe ser una dirección de correo electrónico válida',
 			}),
 	)
 	password1 = forms.CharField(
@@ -164,7 +164,7 @@ class UserFormUpdate(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Debe ser un correo válido',
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 				'rol': forms.Select(attrs={
 					'class': 'form-control',
@@ -239,7 +239,7 @@ class PerfilForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Debe ser un correo válido',
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 		}
 		labels = {
@@ -292,15 +292,15 @@ class ClienteForm(ModelForm):
 					}),
 				'telefono_1': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono principal del cliente. Ejm: 02122234567',
+					'placeholder': 'Teléfono principal del cliente. Ejm: 0212-1234567',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Solo permite ingresar números, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
+					'title': 'Solo permite ingresar digitos, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
 					}),
 				'telefono_2': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono segundario del cliente. Ejm: 04162234567',
+					'placeholder': 'Teléfono segundario del cliente. Ejm: 0416-1234567',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
@@ -320,7 +320,7 @@ class ClienteForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Debe ser un correo válido',
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 				
 		}
@@ -412,7 +412,7 @@ class InventarioForm(ModelForm):
 					'placeholder': 'Cantidad de bultos',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Solo permite ingresar valores numericos enteros',
+					'title': 'Solo permite ingresar digitos',
 					}),
 		}
 		labels = {
@@ -446,7 +446,7 @@ class VentaForm(ModelForm):
 					'placeholder': 'Cantidad del producto a vender',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Solo permite ingresar valores numericos enteros',
+					'title': 'Solo permite ingresar digitos',
 					}),
 				'total_venta': forms.TextInput(attrs={
 					'class': 'form-control', 
@@ -523,11 +523,11 @@ class EmpleadoForm(ModelForm):
 		widgets = {
 				'cedula': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Cédula de identidad del empleado',
+					'placeholder': 'Cédula de identidad del empleado. Ejm:1234567',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite ingresar digitos',
 					}),
 				'primer_nombre': forms.TextInput(attrs={
 					'class': 'form-control', 
@@ -535,7 +535,7 @@ class EmpleadoForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'segundo_nombre': forms.TextInput(attrs={
 					'class': 'form-control', 
@@ -543,7 +543,7 @@ class EmpleadoForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'primer_apellido': forms.TextInput(attrs={
 					'class': 'form-control', 
@@ -551,7 +551,7 @@ class EmpleadoForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'segundo_apellido': forms.TextInput(attrs={
 					'class': 'form-control', 
@@ -559,56 +559,56 @@ class EmpleadoForm(ModelForm):
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'telefono_local': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono de habitación del empleado',
+					'placeholder': 'Teléfono de habitación del empleado. Ejm: 0212-1234567',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite ingresar digitos, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
 					}),
 				'telefono_celular': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono móvil del empleado',
+					'placeholder': 'Teléfono móvil del empleado. Ejm: 0416-1234567',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite ingresar digitos, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
 					}),
 				'fecha_nacimiento': forms.DateInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Fecha de nacimiento del empleado',
+					'placeholder': 'Fecha de nacimiento del empleado. Ejm: dd/mm/yyyy',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Debe ser una fecha válida',
 					}),
 				'direccion': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Dirección',
+					'placeholder': 'Dirección del empleado.',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite ingresar caracteres alfanumericos y numeral(#)',
 					}),
 				'correo_personal': forms.TextInput(attrs={
-					'class': 'form-control', 
-					'placeholder': 'Correo electrónico del empleado',
+					'class': 'form-control', 
+					'placeholder': 'Correo electrónico personal del empleado. Ejm: correo@picnikki.com',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 				'sueldo': forms.TextInput(attrs={
 					'class': 'form-control',
 					'maxlength': '8',
-					'placeholder': 'Sueldo del empleado',
+					'placeholder': 'Sueldo del empleado. Ejm: 12345.01',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Solo permite ingresar valores numericos y punto (.) para valores decimales. Solo admite dos decimales',
 					}),
 				'cargo': forms.Select(attrs={
 					'class': 'form-control',
@@ -618,11 +618,11 @@ class EmpleadoForm(ModelForm):
 					}),
 				'fecha_ingreso': forms.DateInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Fecha de ingreso',
+					'placeholder': 'Fecha de ingreso del empleado. Ejm: dd/mm/yyyy',
 					'autocomplete': 'off',
 					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
-					'title': 'Ejemplo',
+					'title': 'Debe ser una fecha válida',
 					}),
 						
 		}
@@ -662,51 +662,100 @@ class EmpleadoEditForm(ModelForm):
 		widgets = {
 				'cedula': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Cédula de identidad del empleado',
+					'placeholder': 'Cédula de identidad del empleado. Ejm: 12345678',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite ingresar digitos',
 					}),
 				'primer_nombre': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Primer nombre del empleado',
+					'placeholder': 'Primer nombre del empleado.',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'segundo_nombre': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Segundo nombre del empleado',
+					'placeholder': 'Segundo nombre del empleado.',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'primer_apellido': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Primer apellido del empleado',
+					'placeholder': 'Primer apellido del empleado.',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'segundo_apellido': forms.TextInput(attrs={
 					'class': 'form-control', 
 					'placeholder': 'Segundo apellido del empleado',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite caracteres alfabéticos',
 					}),
 				'telefono_local': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono de habitación del empleado',
+					'placeholder': 'Teléfono de habitación del empleado. Ejm: 0212-1234567',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite ingresar digitos, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
 					}),
 				'telefono_celular': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Teléfono móvil del empleado',
+					'placeholder': 'Teléfono móvil del empleado. Ejm: 0416-1234567',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite ingresar digitos, no puede ser igual a ningun otro numero de teléfono suministrado en este formulario',
 					}),
 				'fecha_nacimiento': forms.DateInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Fecha de nacimiento del empleado',
+					'placeholder': 'Fecha de nacimiento del empleado. Ejm: dd/mm/yyyy',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Debe ser una fecha válida',
 					}),
 				'direccion': forms.TextInput(attrs={
 					'class': 'form-control', 
 					'placeholder': 'Dirección del empleado',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite ingresar caracteres alfanumericos y numeral(#)',
 					}),
 				'correo_personal': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Correo electrónico del empleado',
+					'placeholder': 'Correo electrónico del empleado. Ejm: correo@picnikki.com',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 				'correo_corporativo': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Correo corporativo',
+					'placeholder': 'Correo electrónico corporativo del empleado. Ejm: correo@picnikki.com',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Debe ser una dirección de correo electrónico válida',
 					}),
 				'sueldo': forms.TextInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Sueldo del empleado',
+					'placeholder': 'Sueldo del empleado. Ejm: 12345.01',
+					'maxlength': '8',
+					'autocomplete': 'off',
+	Solo permite ingresar caracteres alfanumericos y numeral(#)				'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Solo permite ingresar valores numericos y punto (.) para valores decimales. Solo admite dos decimales',
 					}),
 				'cargo': forms.Select(attrs={
 					'class': 'form-control',
@@ -716,11 +765,18 @@ class EmpleadoEditForm(ModelForm):
 					}),
 				'fecha_ingreso': forms.DateInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Fecha de ingreso',
+					'placeholder': 'Fecha de ingreso del empleado. Ejm: dd/mm/yyyy',
+					'autocomplete': 'off',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Debe ser una fecha válida',
 					}),
 				'fecha_egreso': forms.DateInput(attrs={
 					'class': 'form-control', 
-					'placeholder': 'Fecha de egreso',
+					'placeholder': 'Fecha de egreso del empleado. Ejm: dd/mm/yyyy',
+					'data-toggle': 'tooltip', 
+					'data-placement': 'top', 
+					'title': 'Debe ser una fecha válida',
 					}),
 						
 		}
@@ -742,7 +798,7 @@ class EmpleadoEditForm(ModelForm):
 				'fecha_ingreso': ("* Fecha de ingreso"),
 				'fecha_egreso': ("Fecha de egreso"),
 		}
-
+Debe ser una dirección de correo electrónico válida
 	def __init__(self, *args, **kwargs):
 		super(EmpleadoEditForm, self).__init__(*args, **kwargs)
 		self.fields['segundo_nombre'].required = False
