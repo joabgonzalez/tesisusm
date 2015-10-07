@@ -753,7 +753,7 @@ class EmpleadoEditForm(ModelForm):
 					'placeholder': 'Sueldo del empleado. Ejm: 12345.01',
 					'maxlength': '8',
 					'autocomplete': 'off',
-	Solo permite ingresar caracteres alfanumericos y numeral(#)				'data-toggle': 'tooltip', 
+					'data-toggle': 'tooltip', 
 					'data-placement': 'top', 
 					'title': 'Solo permite ingresar valores numericos y punto (.) para valores decimales. Solo admite dos decimales',
 					}),
@@ -798,7 +798,7 @@ class EmpleadoEditForm(ModelForm):
 				'fecha_ingreso': ("* Fecha de ingreso"),
 				'fecha_egreso': ("Fecha de egreso"),
 		}
-Debe ser una dirección de correo electrónico válida
+		
 	def __init__(self, *args, **kwargs):
 		super(EmpleadoEditForm, self).__init__(*args, **kwargs)
 		self.fields['segundo_nombre'].required = False
