@@ -1,0 +1,240 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Inicio   
+
+{% endblock %}
+
+{% block pagetitle %}
+
+	{% if user.is_staff %}
+
+		Picnikki <span class="pull-right" >Administrador</span>
+
+	{% else %}
+
+		{% for u in usuario %}
+
+			{% if user.id = u.usuario_id %}
+				
+				Picnikki <span class="pull-right" >{{u.primer_nombre|capfirst}} {{u.primer_apellido|capfirst}}</span>
+
+			{% endif %}
+			
+		{% endfor %}
+
+	{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Clientes</h3>
+		</div>
+		<div class="panel-body">
+			
+			{% if cliente %}
+	
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Cliente</th>
+							<th scope="col">Teléfono Principal</th>
+							<th scope="col">Correo Electrónico</th>	
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for c in cliente %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>{{ c.cliente|capfirst }}</td>
+								<td>{{ c.telefono_1 }}</td>
+								<td>{{ c.correo }}</td>
+							</tr>
+
+						{% endif %}
+					
+					{% endfor %}
+					</tbody>
+
+				</table>
+			
+			{% else %}
+
+				<p>No se ha registrado ningún cliente.</p>
+
+			{% endif %}
+			
+			<a href="{% url 'lista_clientes' %}"><button type="button" class="btn btn-warning pull-right">Ver clientes <i class="fa fa-book"></i></button></a>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Productos</h3>
+		</div>
+		<div class="panel-body">
+			
+			{% if producto %}
+
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Código</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Precio unitario (Bs)</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for p in producto %}
+
+						{% if forloop.counter <= 3 %}
+
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td>{{ p.codigo }}</td>
+							<td>{{ p.producto|capfirst }}</td>
+							<td>{{ p.precio_unitario }}</td>
+						</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					<tbody>
+
+				</table>
+
+			{% else %}
+
+				<p>No se ha registrado ningún producto.</p>
+
+			{% endif %}
+
+			<a href="{# url 'lista_productos' #}"><button type="button" class="btn btn-warning pull-right">Ver productos <i class="fa fa-shopping-cart"></i></button></a>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Inventario</h3>
+		</div>
+		<div class="panel-body">
+			
+			{% if inventario %}
+
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Código de producto</th>
+							<th scope="col">Nombre de producto</th>
+							<th scope="col">Cantidad</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for i in inventario %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr> 
+								<td>{{ forloop.counter }}</td>
+								<td>{{ i.codigo_producto }}</td>
+								<td>{{ i.nombre_producto }}</td>
+								<td>{{ i.cantidad_producto }}</td>
+							</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					<tbody>
+
+				</table>
+
+			{% else %}
+
+				<p>No se ha registrado ningún producto en el inventario</p>
+
+			{% endif %}
+
+			<a href="{% url 'inventario' %}"><button type="button" class="btn btn-warning pull-right">Ver inventario <span class="glyphicon glyphicon-barcode" aria-hidden="true"></span></button></a>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Ventas</h3>
+		</div>
+		<div class="panel-body">
+			
+			{% if venta %}
+	
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Cliente</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Cantidad</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for v in venta %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>{{ v.cliente }}</td>
+								<td>{{ v.producto }}</td>
+								<td>{{ v.cantidad }}</td>
+							</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					</tbody>
+
+				</table>
+
+			</div>
+
+			<div class="col-md-1"><!--RELLENO--></div>
+
+			{% else %}
+
+				<p>No se ha registrado ninguna venta.</p>
+
+			{% endif %}
+
+			<a href="{% url 'lista_ventas' %}"><button type="button" class="btn btn-warning pull-right">Ver ventas <i class="fa fa-usd"></i></button></a>
+		</div>
+	</div>
+</div>
+
+<hr>
+<br>
+
+{% endblock %}

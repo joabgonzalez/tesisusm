@@ -1,0 +1,120 @@
+{% extends "plantilla_privada.html" %}
+{% load static %} 
+
+{% block title %}
+
+Estadisticas
+
+{% endblock %}
+
+{% block css %}
+
+<link href="{% static 'morris/prettify.min.css' %}" rel="stylesheet">
+<link href="{% static 'morris/morris.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block pagetitle %}
+
+Gráficos de estadisticas
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+	<div class="col-md-10">
+
+	{% if utilidad %}
+
+	<div id="graph"></div>
+
+		<div style="display: none;">
+
+			<pre id="code" class="prettyprint linenums">
+
+				{% for u in utilidad %}
+
+					var valores = [
+						{"etiqueta": "Enero",
+							"utilidad": {% if u.ene == None %}0{%else%}{{u.ene}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Febrero",
+							"utilidad": {% if u.feb == None %}0{%else%}{{u.feb}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Marzo",
+							"utilidad": {% if u.mar == None %}0{%else%}{{u.mar}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Abril",
+							"utilidad": {% if u.abr == None %}0{%else%}{{u.abr}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Mayo",
+							"utilidad": {% if u.may == None %}0{%else%}{{u.may}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Junio",
+							"utilidad": {% if u.jun == None %}0{%else%}{{u.jun}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Julio",
+							"utilidad": {% if u.jul == None %}0{%else%}{{u.jul}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Agosto",
+							"utilidad": {% if u.ago == None %}0{%else%}{{u.ago}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Septiembre",
+							"utilidad": {% if u.sep == None %}0{%else%}{{u.sep}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Octubre",
+							"utilidad": {% if u.oct == None %}0{%else%}{{u.oct}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Noviembre",
+							"utilidad": {% if u.nov == None %}0{%else%}{{u.nov}}{% endif %},
+							"proyeccion": null},
+						{"etiqueta": "Diciembre",
+							"utilidad": {% if u.dic == None %}0{%else%}{{u.dic}}{% endif %},
+							"proyeccion": null}
+					];
+					Morris.Line({
+						element: 'graph',
+						data: valores,
+						xkey: 'etiqueta',
+						ykeys: ['utilidad'],
+						labels: ['Utilidad'],
+						xLabelAngle: 40,
+						grid: true,
+						parseTime: false,
+						resize: true
+					});
+
+				{% endfor %}
+
+			</pre>
+
+		</div>
+
+		{% else %}
+
+			<p>No se encontraron datos para generar el gráfico de estadisticas.</p>
+
+		{% endif %}
+
+
+	</div>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'morris/raphael-min.js' %}"></script>
+<script src="{% static 'morris/morris.js' %}"></script>
+<script src="{% static 'morris/prettify.min.js' %}"></script>
+<script src="{% static 'morris/graph.js' %}"></script>
+
+{% endblock %}
