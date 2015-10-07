@@ -41,7 +41,7 @@ class UserForm(UserCreationForm):
 			'data-toggle': 'tooltip', 
 			'data-placement': 'top', 
 			'title': 'Solo permite caracteres alfabéticos',
-			}),Debe ser una dirección de correo electrónico válida
+			}),
 	)
 	segundo_apellido = forms.CharField(
 		max_length=50,
