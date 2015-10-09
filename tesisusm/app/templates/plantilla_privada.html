@@ -173,7 +173,7 @@
 									</li>
 									{% if u.rol_id == 1 %}
 										{# estadistica #}
-										<li class="{% if request.resolver_match.url_name == 'estadisticas' %}active{% endif %}">
+										<li class="{% if request.resolver_match.url_name == 'estadisticas' or request.resolver_match.url_name == 'estadisticas_ventas' %}active{% endif %}">
 											<a href="{% url 'estadisticas'%}"><i class="fa fa-bar-chart"></i> Estadísticas </a>
 										</li>
 										{# empleados #}

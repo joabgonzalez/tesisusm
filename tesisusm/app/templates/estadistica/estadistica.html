@@ -24,86 +24,22 @@ Gráficos de estadisticas
 
 <div class="container-fluid"><br>
 
-	<div class="col-md-1"><!--RELLENO--></div>
+	<div class="col-md-4"><!--RELLENO--></div>
 
-	<div class="col-md-10">
+	<div class="col-md-4">
 
-	{% if utilidad %}
+		<form class="form-inline" method="POST" action="/estadisticas/ventas">
 
-	<div id="graph"></div>
+			{% csrf_token %}
+			
+			<input id="id_search_venta" name="search_venta" class="form-control" type="text" maxlength="4" autocomplete="off" placeholder="Ingrese año. Ejm: 2015" data-toggle="tooltip" data-placement="top" data-original-title="Solo permite ingresar digitos">
+			<button type="submit" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="top" title="Buscar"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-		<div style="display: none;">
-
-			<pre id="code" class="prettyprint linenums">
-
-				{% for u in utilidad %}
-
-					var valores = [
-						{"etiqueta": "Enero",
-							"utilidad": {% if u.ene == None %}0{%else%}{{u.ene}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Febrero",
-							"utilidad": {% if u.feb == None %}0{%else%}{{u.feb}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Marzo",
-							"utilidad": {% if u.mar == None %}0{%else%}{{u.mar}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Abril",
-							"utilidad": {% if u.abr == None %}0{%else%}{{u.abr}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Mayo",
-							"utilidad": {% if u.may == None %}0{%else%}{{u.may}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Junio",
-							"utilidad": {% if u.jun == None %}0{%else%}{{u.jun}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Julio",
-							"utilidad": {% if u.jul == None %}0{%else%}{{u.jul}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Agosto",
-							"utilidad": {% if u.ago == None %}0{%else%}{{u.ago}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Septiembre",
-							"utilidad": {% if u.sep == None %}0{%else%}{{u.sep}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Octubre",
-							"utilidad": {% if u.oct == None %}0{%else%}{{u.oct}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Noviembre",
-							"utilidad": {% if u.nov == None %}0{%else%}{{u.nov}}{% endif %},
-							"proyeccion": null},
-						{"etiqueta": "Diciembre",
-							"utilidad": {% if u.dic == None %}0{%else%}{{u.dic}}{% endif %},
-							"proyeccion": null}
-					];
-					Morris.Line({
-						element: 'graph',
-						data: valores,
-						xkey: 'etiqueta',
-						ykeys: ['utilidad'],
-						labels: ['Utilidad'],
-						xLabelAngle: 40,
-						grid: true,
-						parseTime: false,
-						resize: true
-					});
-
-				{% endfor %}
-
-			</pre>
-
-		</div>
-
-		{% else %}
-
-			<p>No se encontraron datos para generar el gráfico de estadisticas.</p>
-
-		{% endif %}
-
+		</form>
 
 	</div>
 
-	<div class="col-md-1"><!--RELLENO--></div>
+	<div class="col-md-4"><!--RELLENO--></div>
 
 
 </div>
@@ -111,6 +47,14 @@ Gráficos de estadisticas
 {% endblock %}
 
 {% block js %}
+
+<script type="text/javascript">
+	
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+</script>
 
 <script src="{% static 'morris/raphael-min.js' %}"></script>
 <script src="{% static 'morris/morris.js' %}"></script>

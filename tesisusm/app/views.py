@@ -1,6 +1,7 @@
 #encoding: utf-8
 from django.views.generic import TemplateView, FormView, ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from django.core.urlresolvers import reverse_lazy
 from django.core.urlresolvers import reverse
 from forms import *
@@ -467,7 +468,8 @@ class DeleteVenta(DeleteView):
 # ESTADISTICAS	#################################################
 #################################################################
 
-#ESTADISTICA / GRAFICA
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+#ESTADISTICA
 class Estadisticas(ListView):
 	template_name = 'estadistica/estadistica.html'
 	model = Utilidad_Mensual
@@ -478,6 +480,21 @@ class Estadisticas(ListView):
 		context['usuario'] = Usuario.objects.all()
 		context['now'] = datetime.datetime.now()
 		return context
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+#ESTADISTICA DE VENTAS
+class EstadisticasVentas(TemplateView):
+	template_name = 'estadistica/estadistica_venta.html'
+
+	def post (self, request, *args, **kwargs):
+		search = request.POST['search_venta']
+		utilidad = Utilidad_Mensual.objects.filter(ano=search)
+		usuario = Usuario.objects.all()
+		now = datetime.datetime.now()
+		return render_to_response(
+			self.template_name, 
+			{'utilidad': utilidad, 'usuario': usuario, 'now': now}, 
+			context_instance=RequestContext(request))
 
 #################################################################
 # EMPLEADOS	#####################################################

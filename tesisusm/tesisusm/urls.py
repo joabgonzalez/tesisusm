@@ -50,6 +50,7 @@ urlpatterns = [
 	url(r'^ventas/(?P<pk>[0-9]+)/eliminar$', login_required(DeleteVenta.as_view()), name='eliminar_ventas'),
 	#ESTADISTICAS
 	url(r'^estadisticas/$', login_required(Estadisticas.as_view()), name='estadisticas'),
+	url(r'^estadisticas/ventas$', login_required(EstadisticasVentas.as_view()), name='estadisticas_ventas'),
 	#EMPLEADOS
 	url(r'^empleados$', login_required(Empleados.as_view()), name='lista_empleados'),
 	url(r'^empleados/ver/(?P<pk>[0-9]+)/$', login_required(VerEmpleado.as_view()), name='ver_empleados'),
