@@ -1,0 +1,252 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Inicio   
+
+{% endblock %}
+
+{% block css %}
+
+	<style type="text/css">
+
+		.hdash {
+			height: 260px;
+		}
+
+		.hdashcont {
+			height: 160px;
+		}
+
+	</style>
+
+{% endblock %}
+
+{% block pagetitle %}
+
+	{% if user.is_staff %}
+
+		Picnikki <span class="pull-right" >Administrador</span>
+
+	{% else %}
+
+		{% for s in sesion %}
+
+			{% if user.id = s.usuario_id %}
+				
+				Picnikki <span class="pull-right" >{{s.primer_nombre|lower|capfirst}} {{s.primer_apellido|lower|capfirst}}</span>
+
+			{% endif %}
+			
+		{% endfor %}
+
+	{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6">
+	<div class="panel panel-default hdash">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong>Clientes</strong></h3>
+		</div>
+		<div class="panel-body">
+			
+			<div class="hdashcont">
+			{% if cliente %}
+	
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">RIF</th>
+							<th scope="col">Cliente</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for c in cliente %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td><strong>{{ c.rif|upper }}</strong></td>
+								<td>{{ c.cliente|lower|capfirst }}</td>
+							</tr>
+
+						{% endif %}
+					
+					{% endfor %}
+					</tbody>
+
+				</table>
+			
+			{% else %}
+
+				<p>No se ha registrado ningún cliente.</p>
+
+			{% endif %}
+			</div>
+			
+			<a href="{% url 'lista_clientes' %}"><button type="button" class="btn btn-info pull-right">Ver clientes <i class="fa fa-book"></i></button></a>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-default hdash">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong>Productos</strong></h3>
+		</div>
+		<div class="panel-body">
+			
+			<div class="hdashcont">
+			{% if producto %}
+
+				<table class="table">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Código</th>
+							<th scope="col">Producto</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for p in producto %}
+
+						{% if forloop.counter <= 3 %}
+
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td><strong>{{ p.codigo }}</strong></td>
+							<td>{{ p.producto|capfirst }}</td>
+						</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					</tbody>
+
+				</table>
+
+			{% else %}
+
+				<p>No se ha registrado ningún producto.</p>
+
+			{% endif %}
+			</div>
+
+			<a href="{# url 'lista_productos' #}"><button type="button" class="btn btn-success pull-right">Ver productos <i class="fa fa-shopping-cart"></i></button></a>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-default hdash">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong>Inventario</strong></h3>
+		</div>
+		<div class="panel-body">
+			
+			<div class="hdashcont">
+			{% if inventario %}
+
+				<table class="table">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Código de producto</th>
+							<th scope="col">Nombre de producto</th>
+							<th scope="col">Cantidad</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for i in inventario %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr> 
+								<td>{{ forloop.counter }}</td>
+								<td><strong>{{ i.codigo_producto }}</strong></td>
+								<td>{{ i.nombre_producto }}</td>
+								<td>{{ i.cantidad_producto }}</td>
+							</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					</tbody>
+
+				</table>
+
+			{% else %}
+
+				<p>No se ha registrado ningún producto en el inventario.</p>
+
+			{% endif %}
+			</div>
+			<a href="{% url 'inventario' %}"><button type="button" class="btn btn-warning pull-right">Ver inventario <span class="glyphicon glyphicon-barcode" aria-hidden="true"></span></button></a>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-default hdash">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong>Ventas</strong></h3>
+		</div>
+		<div class="panel-body">
+			
+			<div class="hdashcont">
+			
+			{% if venta %}
+
+				<table class="table">
+
+					<thead>
+						<tr>
+							<th scope="col">Nº</th>
+							<th scope="col">Cliente</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Cantidad</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{% for v in venta %}
+
+						{% if forloop.counter <= 3 %}
+
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>{{ v.cliente }}</td>
+								<td>{{ v.producto }}</td>
+								<td>{{ v.cantidad }}</td>
+							</tr>
+
+						{% endif %}
+
+					{% endfor %}
+					</tbody>
+
+				</table>
+
+			{% else %}
+
+				<p>No se ha registrado ninguna venta.</p>
+
+			{% endif %}
+			</div>
+
+			<a href="{% url 'inventario' %}"><button type="button" class="btn btn-danger pull-right">Ver ventas <i class="fa fa-usd"></i></button></a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

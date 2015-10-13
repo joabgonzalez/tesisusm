@@ -1,0 +1,119 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Empleados
+
+{% endblock %}
+
+{% block pagetitle %}
+
+{# SI ES ADMINISTRADOR ############################################################}
+
+{% if user.is_staff %}
+
+{# CONTENIDO ADMIN ################################################################}
+
+Eliminar empleado
+
+{# SI TIENE PERMISO ###############################################################}
+
+{% else %}
+	{% for s in sesion.all %}
+		{% if user.id = s.usuario_id %}
+			{% if s.rol_id = 1 %}
+
+{# CONTENIDO USUARIO ##############################################################}
+
+Eliminar empleado
+
+{# SI NO TIENE PERMISO#############################################################}
+
+			{% else %}
+				Acceso denegado
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# FIN DE VALIDACION ##############################################################}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+	<div class="col-md-8">
+
+	{# SI ES ADMINISTRADOR ############################################################}
+
+	{% if user.is_staff %}
+
+	{# CONTENIDO ADMIN ################################################################}
+
+		<form action="" method="post">
+
+			{% csrf_token %}
+
+				<div class="alert alert-warning" role="alert">
+					<h4>¿Está seguro que desea eliminar el empleado <strong>"{{ empleado.primer_nombre }} {{ empleado.primer_apellido }}"</strong>?</h4>
+				</div>
+
+				<button type="submit" class="btn btn-success pull-right" style="margin: 2px"> Si <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+				<a href="{% url 'lista_empleados' %}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	{# SI TIENE PERMISO ###############################################################}
+
+	{% else %}
+		{% for s in sesion.all %}
+			{% if user.id = s.usuario_id %}
+				{% if s.rol_id = 1 %}
+
+	{# CONTENIDO USUARIO ##############################################################}
+
+		<form action="" method="post">
+
+			{% csrf_token %}
+
+				<div class="alert alert-warning" role="alert">
+					<h4>¿Está seguro que desea eliminar el empleado <strong>"{{ empleado.primer_nombre }} {{ empleado.primer_apellido }}"</strong>?</h4>
+				</div>
+
+				<button type="submit" class="btn btn-success pull-right" style="margin: 2px"> Si <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+				<a href="{% url 'lista_empleados' %}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	{# SI NO TIENE PERMISO ############################################################}
+
+				{% else %}
+					<div id="alertError" class="alert alert-danger" role="alert">
+						<strong>Disculpe</strong>, usted no tiene permiso para acceder a este módulo.
+					</div>
+
+					<script type="text/javascript">
+						window.setTimeout(function() {
+						    window.location.href = '/dashboard';
+						}, 3000);
+					</script>
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{# FIN DE VALIDACION ##############################################################}
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+
+{% endblock %} 

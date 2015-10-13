@@ -1,0 +1,127 @@
+{% extends "plantilla_privada.html" %}
+{% load static %}
+
+{% block title %}
+
+Inventario
+
+{% endblock %}
+
+{% block pagetitle %}
+
+{# SI ES ADMINISTRADOR ############################################################}
+
+{% if user.is_staff %}
+
+{# CONTENIDO ADMIN ################################################################}
+
+Editar disponibilidad del producto
+
+{# SI TIENE PERMISO ###############################################################}
+
+{% else %}
+	{% for s in sesion.all %}
+		{% if user.id = s.usuario_id %}
+			{% if s.rol_id = 1 %}
+
+{# CONTENIDO USUARIO ##############################################################}
+
+Editar disponibilidad del producto
+
+{# SI NO TIENE PERMISO#############################################################}
+
+			{% else %}
+				Acceso denegado
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# FIN DE VALIDACION ##############################################################}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+	<div class="col-md-3"><!--RELLENO--></div>
+
+	<div class="col-md-6">
+
+	{# SI ES ADMINISTRADOR ############################################################}
+
+	{% if user.is_staff %}
+
+	{# CONTENIDO ADMIN ################################################################}
+
+		<form method="POST">
+
+			{% csrf_token %}
+
+			{{form.as_p}}
+
+			<p class="help-block"><strong>Nota:</strong> Los campos marcados con asterisco (*) son obligatorios.</p>
+
+			<br>
+			<button id="btnForm" type="submit" class="btn btn-success pull-right" style="margin: 2px" disabled> Registrar <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+			<a href="{% url 'inventario' %}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> Cancelar <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	{# SI TIENE PERMISO ###############################################################}
+
+	{% else %}
+		{% for s in sesion.all %}
+			{% if user.id = s.usuario_id %}
+				{% if s.rol_id = 1 %}
+
+	{# CONTENIDO USUARIO ##############################################################}
+
+		<form method="POST">
+
+			{% csrf_token %}
+
+			{{form.as_p}}
+
+			<p class="help-block"><strong>Nota:</strong> Los campos marcados con asterisco (*) son obligatorios.</p>
+
+			<br>
+			<button id="btnForm" type="submit" class="btn btn-success pull-right" style="margin: 2px" disabled> Registrar <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+			<a href="{% url 'inventario' %}"><button type="button" class="btn btn-danger pull-right" style="margin: 2px"> Cancelar <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></a>
+
+		</form>
+
+	{# SI NO TIENE PERMISO ############################################################}
+
+				{% else %}
+					<div id="alertError" class="alert alert-danger" role="alert">
+						<strong>Disculpe</strong>, usted no tiene permiso para acceder a este módulo.
+					</div>
+
+					<script type="text/javascript">
+						window.setTimeout(function() {
+						    window.location.href = '/dashboard';
+						}, 3000);
+					</script>
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{# FIN DE VALIDACION ##############################################################}
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'js/validaciones/inventario/inventarioEdit.js' %}"></script>
+
+{% endblock %}

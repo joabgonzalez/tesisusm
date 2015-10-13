@@ -1,0 +1,192 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Empleados
+
+{% endblock %}
+
+{% block pagetitle %}
+
+{# SI ES ADMINISTRADOR ############################################################}
+
+{% if user.is_staff %}
+
+{# CONTENIDO ADMIN ################################################################}
+
+Listado de empleados
+
+<a href="{% url 'registro_empleados' %}"><button type="button" class="btn btn-warning pull-right">Registrar <i class="fa fa-male"></i></button></a>
+
+{# SI TIENE PERMISO ###############################################################}
+
+{% else %}
+	{% for s in sesion.all %}
+		{% if user.id = s.usuario_id %}
+			{% if s.rol_id = 1 %}
+
+{# CONTENIDO USUARIO ##############################################################}
+
+Listado de empleados
+
+<a href="{% url 'registro_empleados' %}"><button type="button" class="btn btn-warning pull-right">Registrar <i class="fa fa-male"></i></button></a>
+
+{# SI NO TIENE PERMISO#############################################################}
+
+			{% else %}
+				Acceso denegado
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# FIN DE VALIDACION ##############################################################}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+
+	<div class="col-md-10">
+
+	{# SI ES ADMINISTRADOR ############################################################}
+
+	{% if user.is_staff %}
+
+	{# CONTENIDO ADMIN ################################################################}
+
+	{% if empleado %}
+	
+		<table class="table table-striped">
+
+			<thead>
+				<tr>
+					<th scope="col">Nº</th>
+					<th scope="col">Cedula</th>
+					<th scope="col">Primer nombre</th>
+					<th scope="col">Primer apellido</th>
+					<th scope="col">Cargo</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			{% for e in empleado %}
+
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><strong>{{ e.cedula }}</strong></td>
+				<td>{{ e.primer_nombre|capfirst }}</td>
+				<td>{{ e.primer_apellido|capfirst }}</td>
+				<td>{{ e.cargo }}</td>
+				<td>
+					<a href="{% url 'ver_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></a>
+					<a href="{% url 'editar_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+					<a href="{% url 'eliminar_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+				</td>
+			</tr> 
+
+			{% endfor %}
+			</tbody>
+
+		</table>
+
+	{% else %}
+
+		<p>No se ha registrado ningún empleado.</p>
+
+	{% endif %}
+
+	{# SI TIENE PERMISO ###############################################################}
+
+	{% else %}
+		{% for s in sesion.all %}
+			{% if user.id = s.usuario_id %}
+				{% if s.rol_id = 1 %}
+
+	{# CONTENIDO USUARIO ##############################################################}
+
+	{% if empleado %}
+	
+		<table class="table table-striped">
+
+			<thead>
+				<tr>
+					<th scope="col">Nº</th>
+					<th scope="col">Cedula</th>
+					<th scope="col">Primer nombre</th>
+					<th scope="col">Primer apellido</th>
+					<th scope="col">Cargo</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			{% for e in empleado %}
+
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><strong>{{ e.cedula }}</strong></td>
+				<td>{{ e.primer_nombre|capfirst }}</td>
+				<td>{{ e.primer_apellido|capfirst }}</td>
+				<td>{{ e.cargo }}</td>
+				<td>
+					<a href="{% url 'ver_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></a>
+					<a href="{% url 'editar_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+					<a href="{% url 'eliminar_empleados' e.id_empleado %}"><button type="button" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+				</td>
+			</tr> 
+
+			{% endfor %}
+			</tbody>
+
+		</table>
+
+	{% else %}
+
+		<p>No se ha registrado ningún empleado.</p>
+
+	{% endif %}
+
+	{# SI NO TIENE PERMISO ############################################################}
+
+				{% else %}
+					<div id="alertError" class="alert alert-danger" role="alert">
+						<strong>Disculpe</strong>, usted no tiene permiso para acceder a este módulo.
+					</div>
+
+					<script type="text/javascript">
+						window.setTimeout(function() {
+						    window.location.href = '/dashboard';
+						}, 3000);
+					</script>
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{# FIN DE VALIDACION ##############################################################}
+
+	</div>
+
+	<div class="col-md-1"><!--RELLENO--></div>
+	
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+	
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+</script>
+	
+{% endblock %}

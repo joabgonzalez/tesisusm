@@ -1,2 +1,3 @@
-# Actualizado 08-10
-Se acerca la version final.
+# Actualizado 12-08-2015
+Version 100% (Estable)
+Solo falta el cambio de contraseña

@@ -1,0 +1,142 @@
+{% extends "plantilla_privada.html" %}
+
+{% block title %}
+
+Usuarios
+
+{% endblock %}
+
+{% block pagetitle %}
+
+{# SI ES ADMINISTRADOR ############################################################}
+
+{% if user.is_staff %}
+
+{# CONTENIDO ADMIN ################################################################}
+
+Detalle de usuario
+
+{# SI TIENE PERMISO ###############################################################}
+
+{% else %}
+	{% for s in sesion.all %}
+		{% if user.id = s.usuario_id %}
+			{% if s.rol_id = 1 %}
+
+{# CONTENIDO USUARIO ##############################################################}
+
+Detalle de usuario
+
+{# SI NO TIENE PERMISO#############################################################}
+
+			{% else %}
+				Acceso denegado
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# FIN DE VALIDACION ##############################################################}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid"><br>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+	<div class="col-md-8">
+
+	{# SI ES ADMINISTRADOR ############################################################}
+
+	{% if user.is_staff %}
+
+	{# CONTENIDO ADMIN ################################################################}
+
+	<ul class="list-group">
+		<li class="list-group-item" style="background-color: #F5F5F5"><strong>Usuario:</strong> {{usuario.usuario}}</li>
+		<li class="list-group-item"><strong>Primer nombre:</strong> {{usuario.primer_nombre|capfirst}}</li>
+		{% if usuario.segundo_nombre %}
+			<li class="list-group-item"><strong>Segundo nombre:</strong> {{usuario.segundo_nombre|capfirst}}</li>
+		{% endif %}
+		<li class="list-group-item"><strong>Primer apellido:</strong> {{usuario.primer_apellido|capfirst}}</li>
+		{% if usuario.segundo_apellido %}
+			<li class="list-group-item"><strong>Segundo apellido:</strong> {{usuario.segundo_apellido|capfirst}}</li>
+		{% endif %}
+		<li class="list-group-item"><strong>Correo electrónico:</strong> {{usuario.correo}}</li>
+		<li class="list-group-item"><strong>Rol de usuario:</strong> {{usuario.rol }}</li>
+		<li class="list-group-item"><strong>Fecha de creación:</strong> {{usuario.fecha_creacion|date:"d/m/Y - h:i:s a"}}</li>
+		<li class="list-group-item"><strong>Usuario activo:</strong> 
+			{% if usuario.activo %}
+				<label style="color: green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></label>
+			{% else %}
+				<label style="color: red"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></label>
+			{% endif %}
+		</li>
+	</ul>
+
+	<a href="{% url 'editar_usuarios' usuario.id_usuario %}"><button type="button" class="btn btn-info pull-right" style="margin: 2px">Editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+	<a href="{% url 'lista_usuarios' %}"><button type="button" class="btn btn-primary pull-right" style="margin: 2px">Volver <i class="fa fa-arrow-left"></i></button></a>
+
+	{# SI TIENE PERMISO ###############################################################}
+	
+	{% else %}
+		{% for s in sesion.all %}
+			{% if user.id = s.usuario_id %}
+				{% if s.rol_id = 1 %}
+
+	{# CONTENIDO USUARIO ##############################################################}
+
+	<ul class="list-group">
+		<li class="list-group-item" style="background-color: #F5F5F5"><strong>Usuario:</strong> {{usuario.usuario}}</li>
+		<li class="list-group-item"><strong>Primer nombre:</strong> {{usuario.primer_nombre|capfirst}}</li>
+		{% if usuario.segundo_nombre %}
+			<li class="list-group-item"><strong>Segundo nombre:</strong> {{usuario.segundo_nombre|capfirst}}</li>
+		{% endif %}
+		<li class="list-group-item"><strong>Primer apellido:</strong> {{usuario.primer_apellido|capfirst}}</li>
+		{% if usuario.segundo_apellido %}
+			<li class="list-group-item"><strong>Segundo apellido:</strong> {{usuario.segundo_apellido|capfirst}}</li>
+		{% endif %}
+		<li class="list-group-item"><strong>Correo electrónico:</strong> {{usuario.correo}}</li>
+		<li class="list-group-item"><strong>Rol de usuario:</strong> {{usuario.rol }}</li>
+		<li class="list-group-item"><strong>Fecha de creación:</strong> {{usuario.fecha_creacion|date:"d/m/Y - h:i:s a"}}</li>
+		<li class="list-group-item"><strong>Usuario activo:</strong> 
+			{% if usuario.activo %}
+				<label style="color: green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></label>
+			{% else %}
+				<label style="color: red"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></label>
+			{% endif %}
+		</li>
+	</ul>
+
+	<a href="{% url 'editar_usuarios' usuario.id_usuario %}"><button type="button" class="btn btn-info pull-right" style="margin: 2px">Editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+	<a href="{% url 'lista_usuarios' %}"><button type="button" class="btn btn-primary pull-right" style="margin: 2px">Volver <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button></a>
+
+	{# SI NO TIENE PERMISO ############################################################}
+
+				{% else %}
+					<div id="alertError" class="alert alert-danger" role="alert">
+						<strong>Disculpe</strong>, usted no tiene permiso para acceder a este módulo.
+					</div>
+
+					<script type="text/javascript">
+						window.setTimeout(function() {
+						    window.location.href = '/dashboard';
+						}, 3000);
+					</script>
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{# FIN DE VALIDACION ##############################################################}
+
+	</div>
+
+	<div class="col-md-2"><!--RELLENO--></div>
+
+</div>
+
+{% endblock %}
